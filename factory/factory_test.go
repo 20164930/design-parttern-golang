@@ -1,24 +1,17 @@
 package factory
 
-import (
-	"testing"
-)
+import "testing"
 
-func TestFactoryMethod(t *testing.T) {
-
-	assert := []string{"A", "B", "C"}
-
-	factory := &Factory{}
-	products := []Product{
-		factory.Create(assert[0]),
-		factory.Create(assert[1]),
-		factory.Create(assert[2]),
+func TestFactory(t *testing.T) {
+	factory1 := FactoryA{}
+	factory2 := FactoryB{}
+	product1 := factory1.createProduct()
+	product2 := factory2.createProduct()
+	if product1.show() != "productA" {
+		t.Error("produce productA error")
 	}
 
-	for i, product := range products {
-		if product.getQuality() != i + 1 {
-			t.Errorf("create product error : %s quality is %d", assert[i], product.getQuality())
-		}
+	if product2.show() != "productB" {
+		t.Error("produce productB error")
 	}
-
 }
